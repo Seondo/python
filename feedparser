@@ -1,0 +1,45 @@
+from selenium import webdriver
+import chromedriver_autoinstaller
+chrome_ver = chromedriver_autoinstaller.get_chrome_version().split('.')[0]#크롬드라이버 버전 확인
+import time
+import random
+import pyperclip
+try:
+    driver = webdriver.Chrome(f'./{chrome_ver}/chromedriver.exe')
+except:
+    chromedriver_autoinstaller.install(True)
+    driver = webdriver.Chrome(f'./{chrome_ver}/chromedriver.exe')
+driver.implicitly_wait(10)
+
+
+#테스트
+import feedparser
+url = "http://news.google.co.kr/news?pz=1&ned=kr&hl=ko&topic=b&output=rss"
+d = feedparser.parse(url)
+print('엔트리 수 :', len(d.entries))
+print('피드 타이틀 :', d.feed.title)
+print('피드 설명 :', d.feed.description)
+print(d.entries)
+
+myentries = d.entries
+print('타이틀 :', myentries[0].title)
+print('링크 :', myentries[0].link)
+print('변경일 :', myentries[0].updated)
+print('변경 시간 :', myentries[0].updated_parsed)
+print('-' * 30)
+
+f.truncate(0)
+
+f = open("구글뉴스RSS.txt", 'a', encoding='utf-8')
+    f.write(myentries[0].link+ '\n')
+f = open("구글뉴스RSS.txt", 'a', encoding='utf-8')
+    f.write(myentries[1].link+ '\n')
+f = open("구글뉴스RSS.txt", 'a', encoding='utf-8')
+    f.write(myentries[2].link+ '\n')
+f = open("구글뉴스RSS.txt", 'a', encoding='utf-8')
+    f.write(myentries[3].link+ '\n')
+f = open("구글뉴스RSS.txt", 'a', encoding='utf-8')
+    f.write(myentries[4].link+ '\n')
+
+
+
